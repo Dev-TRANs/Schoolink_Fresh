@@ -34,6 +34,7 @@ export default (props: Props) => {
                 json: {
                   type: 'create_school',
                   schoolName: schoolName,
+                  password: props.password
                 }
               }).json()
             } catch (_error) {
