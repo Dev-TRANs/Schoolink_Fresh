@@ -20,7 +20,10 @@ export default (props: Props) => {
         <div>
           <div>
             <label>正式名称</label>
-            <input className='border' placeholder='正式名称' value={schoolName} onInput={e => setSchoolName(e.target.value)}/>
+            <input className='border' placeholder='正式名称' value={schoolName} onInput={e => {
+              setSchoolName(e.target.value)
+              setCreatedSchoolId('')
+            }}/>
           </div>
         </div>
         <div>
@@ -39,7 +42,6 @@ export default (props: Props) => {
               }).json()
             } catch (_error) {
               alert('エラーが発生しました。パスワードが間違っている可能性があります。')
-              alert(_error)
             }
             setCreatedSchoolId(result.schoolId)
           }}>学校を作成する</button>
@@ -49,6 +51,7 @@ export default (props: Props) => {
             <div>{ schoolName }の作成に成功しました！</div>
             <div>
               <div>IDは、 {createdSchoolId}です。</div>
+              <div>このメッセージは、学校名入力エリアの学校名を編集すると消えます。</div>
             </div>
           </div>
         }
