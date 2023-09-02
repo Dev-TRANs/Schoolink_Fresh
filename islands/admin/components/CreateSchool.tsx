@@ -38,6 +38,7 @@ export default (props: Props) => {
               }).json()
             } catch (_error) {
               alert('エラーが発生しました。パスワードが間違っている可能性があります。')
+              alert(_error)
             }
             setCreatedSchoolId(result.schoolId)
           }}>学校を作成する</button>
