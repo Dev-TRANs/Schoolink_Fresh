@@ -34,7 +34,7 @@
     "twind/": "https://esm.sh/twind@0.16.19/",
     "$std/": "https://deno.land/std@0.193.0/",
     "~/": "./",
-    "ky": "https://esm.sh/ky@1.1.0"
+    "ky": "https://esm.sh/ky"
   },
   "compilerOptions": {
     "jsx": "react-jsx",
