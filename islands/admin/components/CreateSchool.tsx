@@ -35,7 +35,7 @@ export default (props: Props) => {
                   type: 'create_school',
                   schoolName: schoolName,
                 }
-              })
+              }).json()
             } catch (_error) {
               alert('エラーが発生しました。パスワードが間違っている可能性があります。')
             }
