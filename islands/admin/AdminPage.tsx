@@ -11,7 +11,7 @@ export default () => {
     <div>
       <div class='my-4'>
         <label>Password:</label>
-        <input type='password' onInput={(evt) => {
+        <input type='password border p-1 ml-2' onInput={(evt) => {
           setPassword(evt.target.value)
         }} value={password} />
       </div>
