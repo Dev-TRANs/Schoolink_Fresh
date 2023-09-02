@@ -18,7 +18,7 @@ export default (props: Props) => {
             try {
               result = await ky.post('/admin/api', {
                 json: {
-                  type: 'get_schools',
+                  type: 'get_schools_data',
                   password: props.password
                 }
               }).json()
