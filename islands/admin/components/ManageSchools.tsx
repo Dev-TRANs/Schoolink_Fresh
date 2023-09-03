@@ -24,6 +24,7 @@ export default (props: Props) => {
               }).json()
             } catch (error) {
               alert('エラーが発生しました。パスワードが間違っている可能性があります。')
+              alert(error)
               throw error
             }
     setSchoolsData(result.schoolsData)
