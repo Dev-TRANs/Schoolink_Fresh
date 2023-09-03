@@ -1,6 +1,9 @@
 import { toHashString } from '$std/crypto/to_hash_string.ts'
+import type { Schools } from '~/types/schools.ts'
 
-const encoder = new TextEncoder();
+const kv = await Deno.openKv()
+
+const encoder = new TextEncoder()
 
 async function sha256(input: string): Promise<string> {
   const data = encoder.encode(input)
@@ -29,7 +32,20 @@ export const handler: Handlers<User | null> = {
         return jsonResp({
           schoolId: schoolId,
         })
-        break;
+        break
+      }
+      case 'get_schools_data': {
+        const result: Schools[] = []
+        
+        const entries = db.list({ prefix: ["schools"] }) // schools一覧をDBから取得
+        for await (const entry of entries) {
+          const data = entry.value as Schools
+          result.push(data)
+        }
+        return jsonResp({
+          schoolsData: result,
+        })
+        break
       }
     }
     return new Response('400 Bad Request', {
