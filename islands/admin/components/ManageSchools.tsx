@@ -84,6 +84,7 @@ export default (props: Props) => {
                     }                 
                   }}>✏️</td>
                   <td onClick={async () => {
+                    if (!confirm(`本当に${schoolData.schoolName}のデータ消しちゃうのー？`)) return
                     try {
                       await ky.post('/admin/api', {
                         json: {
@@ -93,6 +94,7 @@ export default (props: Props) => {
                           password: props.password,
                         }
                       }).json()
+                      alert('成功!')
                     } catch (error) {
                       alert('エラーが発生しました。パスワードが間違っている可能性があります。')
                       alert(error)
