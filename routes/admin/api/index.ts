@@ -56,7 +56,7 @@ export const handler: Handlers<User | null> = {
       case 'rename_school': {
         // Rename School
         await kv.set(['schools', data.schoolId], {
-          schoolId,
+          schoolId: data.schoolId,
           schoolName: data.newName,
         })
         return jsonResp({
