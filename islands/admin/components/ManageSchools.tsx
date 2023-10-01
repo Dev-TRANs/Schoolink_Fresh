@@ -73,6 +73,7 @@ export default (props: Props) => {
                           type: 'rename_school',
                           schoolId: schoolData.schoolId,
                           newName,
+                          password: props.password,
                         }
                       })
                       alert('成功')
@@ -88,7 +89,8 @@ export default (props: Props) => {
                         json: {
                           type: 'remove_school',
                           password: props.password,
-                          id: schoolData.schoolId
+                          id: schoolData.schoolId,
+                          password: props.password,
                         }
                       }).json()
                     } catch (error) {
