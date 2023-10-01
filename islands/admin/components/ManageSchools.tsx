@@ -55,10 +55,43 @@ export default (props: Props) => {
             {
               schoolsData.map(schoolData => {
                 return <tr>
-                  <th>{ schoolData.schoolId }</th>
-                  <th>{ schoolData.schoolName }</th>
-                  <th></th>
-                  <th></th>
+                  <td>{ schoolData.schoolId }</td>
+                  <th>{ schoolData.schoolName }</td>
+                  <td onClick={async () => {
+                    if (!confirm(`Do you want to edit '${schoolData.schoolName}' name?`)) return
+                    const newName: string = prompt('What is new name?')
+                    if (!confirm(`I'm going to rename ${newName}, Ok?`)) return
+
+                    try {
+                      await ky.post('/admin/api', {
+                        json: {
+                          type: 'rename_school',
+                          schoolId: schoolData.schoolId,
+                          newName,
+                        }
+                      })
+                      alert('成功')
+                    } catch (error) {
+                      alert('エラーが発生しました。パスワードが間違っている可能性があります。')
+                      alert(error)
+                      throw error
+                    }                 
+                  }}>✏️</td>
+                  <td onClick={async () => {
+                    try {
+                      await ky.post('/admin/api', {
+                        json: {
+                          type: 'remove_school',
+                          password: props.password,
+                          id: schoolData.schoolId
+                        }
+                      }).json()
+                    } catch (error) {
+                      alert('エラーが発生しました。パスワードが間違っている可能性があります。')
+                      alert(error)
+                      throw error
+                    }
+                  }}>🗑️</td>
                 </tr>
               })
             }
