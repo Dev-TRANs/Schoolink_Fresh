@@ -56,7 +56,7 @@ export default (props: Props) => {
               schoolsData.map(schoolData => {
                 return <tr>
                   <td>{ schoolData.schoolId }</td>
-                  <th>{ schoolData.schoolName }</td>
+                  <td>{ schoolData.schoolName }</td>
                   <td onClick={async () => {
                     if (!confirm(`Do you want to edit '${schoolData.schoolName}' name?`)) return
                     const newName: string = prompt('What is new name?')
