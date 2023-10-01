@@ -59,7 +59,12 @@ export default (props: Props) => {
                   <td>{ schoolData.schoolName }</td>
                   <td onClick={async () => {
                     if (!confirm(`Do you want to edit '${schoolData.schoolName}' name?`)) return
-                    const newName: string = prompt('What is new name?')
+                    const newNameInfo = prompt('What is new name?')
+                    if (!newNameInfo) {
+                      alert('作業を拒否しました！')
+                      return
+                    }
+                    const newName: string = newNameInfo
                     if (!confirm(`I'm going to rename ${newName}, Ok?`)) return
 
                     try {
