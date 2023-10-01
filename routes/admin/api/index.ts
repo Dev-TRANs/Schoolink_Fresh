@@ -53,6 +53,23 @@ export const handler: Handlers<User | null> = {
         })
         break
       }
+      case 'rename_school': {
+        // Rename School
+        await kv.set(['schools', data.schoolId], {
+          schoolId,
+          schoolName: data.newName,
+        })
+        return jsonResp({
+          status: 'ok',
+        })
+      }
+      case 'remove_school': {
+        // Rename School
+        await kv.delete(['schools', data.id])
+        return jsonResp({
+          status: 'ok',
+        })
+      }
     }
     return new Response('400 Bad Request', {
       status: '400',
