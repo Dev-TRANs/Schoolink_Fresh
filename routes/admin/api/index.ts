@@ -37,7 +37,7 @@ export const handler: Handlers<User | null> = {
       case 'get_schools_data': {
         const result: Schools[] = []
         
-        const entries = db.list({ prefix: ["schools"] }) // schools一覧をDBから取得
+        const entries = kv.list({ prefix: ["schools"] }) // schools一覧をDBから取得
         for await (const entry of entries) {
           const data = entry.value as Schools
           result.push(data)
