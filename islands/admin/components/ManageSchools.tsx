@@ -14,19 +14,20 @@ export default (props: Props) => {
     schoolName: string
   }[]>([])
   const syncSchoolsData = async () => {
-            let result
-            try {
-              result = await ky.post('/admin/api', {
-                json: {
-                  type: 'get_schools_data',
-                  password: props.password
-                }
-              }).json()
-            } catch (error) {
-              alert('エラーが発生しました。パスワードが間違っている可能性があります。')
-              alert(error)
-              throw error
-            }
+    let result
+    try {
+      result = await ky.post('/admin/api', {
+        json: {
+          type: 'get_schools_data',
+          password: props.password
+         }
+      }).json()
+    } catch (error) {
+      alert('エラーが発生しました。パスワードが間違っている可能性があります。')
+      alert(error)
+      throw error
+    }
+    alert(JSON.stringify(result))
     setSchoolsData(result.schoolsData)
   }
   return <div>
