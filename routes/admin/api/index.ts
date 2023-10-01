@@ -1,5 +1,5 @@
 import { toHashString } from '$std/crypto/to_hash_string.ts'
-import type { Schools } from '~/types/schools.ts'
+import type { School } from '~/types/schools.ts'
 
 const kv = await Deno.openKv()
 
@@ -29,17 +29,23 @@ export const handler: Handlers<User | null> = {
     switch (data.type) {
       case 'create_school': {
         const schoolId = crypto.randomUUID()
+        await kv.atomic()
+          .set(['schools', schoolId], {
+            schoolName: data.schoolName,
+            schoolId,
+          })
+          .commit()
         return jsonResp({
           schoolId: schoolId,
         })
         break
       }
       case 'get_schools_data': {
-        const result: Schools[] = []
+        const result: School[] = []
         
         const entries = kv.list({ prefix: ["schools"] }) // schools一覧をDBから取得
         for await (const entry of entries) {
-          const data = entry.value as Schools
+          const data = entry.value as School
           result.push(data)
         }
         return jsonResp({
